@@ -87,6 +87,7 @@ public OnPluginStart()
 	//Hook Events
 	HookEvent("player_spawn", Ev_PlayerSpawn, EventHookMode_Post);
 	HookEvent("player_death", Ev_PlayerDeath);
+	HookEvent("player_team",Ev_PlayerTeam);
 	HookEvent("round_start", Ev_RoundStart);
 	HookEvent("round_end", Ev_RoundEnd);
 		
@@ -172,6 +173,32 @@ public Action:Ev_PlayerDeath(Handle:event, const String:name[], bool:dontBroadca
 	CreateTimer(0.1, TSObserTarDead, client);
 	
 	RefreshClientCheats(client);
+}
+
+public Action:Ev_PlayerTeam(Handle:event, const String:name[], bool:dontBroadcast)
+{
+	if(GetEventBool(event,"disconnect")) return Plugin_Continue;
+	
+	new client = GetClientOfUserId(GetEventInt(event,"userid"));
+	new newteam = GetEventInt(event,"team");
+	new Spr = Clspritent[client];
+	if(newteam <= 1)
+	{	//Switched to spec, must remove sprite
+		if(IsValidEntity(Spr)) DestroyESPSpr(Spr);
+		Clspritent[client] = 0;
+	}
+	else
+	{
+		if(Spr <= 0 || !IsValidEntity(Spr)) return Plugin_Continue;
+				
+		decl String:SprModel[MaxCvarLn];
+		Entity_GetModel(Spr, SprModel, sizeof(SprModel));
+		if(!StrEqual(SprModel, g_TeamSpr[newteam], false) && g_TeamSpr[newteam][0]!='\0')
+		{
+			Entity_SetModel(Spr, g_TeamSpr[newteam]);
+		}
+	}
+	return Plugin_Continue;
 }
 
 #endif //--------------------------------- Events End ----------------------------------------//
