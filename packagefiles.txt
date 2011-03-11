@@ -1,0 +1,10 @@
+addons\sourcemod\plugins\cheatbustertools.smx
+addons\sourcemod\gamedata\cheatbuster.gamedata.txt
+addons\sourcemod\scripting\cheatbustertools.sp
+cfg\sourcemod\admincheats_off.cfg
+cfg\sourcemod\admincheats_on.cfg
+cfg\sourcemod\cheatbustertools.cfg
+materials\sprites\player_blue_small2.vmt
+materials\sprites\player_blue_small2.vtf
+materials\sprites\player_red_small2.vmt
+materials\sprites\player_red_small2.vtf
