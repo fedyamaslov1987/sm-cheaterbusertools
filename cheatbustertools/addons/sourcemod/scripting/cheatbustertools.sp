@@ -8,7 +8,7 @@
 #define REQUIRE_PLUGIN
 #include <smlib>
 
-#define PLUGIN_VERSION "1.2"
+#define PLUGIN_VERSION "1.2.1"
 #define DEBUG 0
 
 public Plugin:myinfo = {
